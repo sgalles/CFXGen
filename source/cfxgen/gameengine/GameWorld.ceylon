@@ -1,4 +1,4 @@
-import ceylonfx.scene {	Scene}import ceylonfx.stage {	Stage}
-shared abstract class GameWorld(Stage primaryStage)  {		
-	Scene gameSurface = primaryStage.scene();	
+import ceylon.language {	shared}import ceylonfx.animation {	KeyFrame,	Timeline}import ceylonfx.event {	ActionEvent}import ceylonfx.scene {	Scene,	Group}import ceylonfx.stage {	Stage}import ceylonfx.util {	Duration}import javafx.animation {	JAnimation=Animation {		animationIndefinite = \iINDEFINITE	}} 
+	shared abstract class GameWorld(	Stage primaryStage,	Integer framesPerSecond = 60)  {	
+	Scene gameSurface = primaryStage.scene();	Group sceneNodes = gameSurface.group;		// build and set game loop	Duration oneFrameAmt = Duration(1000.0 / framesPerSecond);		void updateSprites() {}		void checkCollisions() {} 		void cleanupSprites() {}		KeyFrame oneFrame = KeyFrame(oneFrameAmt, void(ActionEvent event){				 // update actors        updateSprites();        // check for collision        checkCollisions();        // removed dead things        cleanupSprites();			});		Timeline gameLoop = Timeline({oneFrame}, animationIndefinite);	
 }

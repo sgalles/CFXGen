@@ -1,1 +1,0 @@
-package cfxgen.ceylonfx.animation;
